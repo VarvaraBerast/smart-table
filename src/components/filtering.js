@@ -1,5 +1,4 @@
 export function initFiltering(elements) {
-
   const updateIndexes = (elements, indexes) => {
     Object.keys(indexes).forEach((elementName) => {
       elements[elementName].append(
@@ -16,17 +15,21 @@ export function initFiltering(elements) {
   const applyFiltering = (query, state, action) => {
     // @todo: #4.2 — обработать очистку поля
     if (action?.name === "clear") {
-      const filterWrapper = action.closest(".filter-wrapper");
-      const input = filterWrapper.querySelector("input");
+      const parent = action.parentElement;
+
+      const input = parent.querySelector("input");
       if (input) {
         input.value = "";
       }
+      
       const fieldName = action.dataset.field;
       if (fieldName && state.filters) {
         state.filters[fieldName] = "";
       }
+      return {};
     }
 
+    const filter = {};
     // @todo: #4.5 — отфильтровать данные
     Object.keys(elements).forEach((key) => {
       if (elements[key]) {
