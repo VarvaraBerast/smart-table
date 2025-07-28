@@ -44,8 +44,8 @@ export const initPagination = ({ pages, fromRow, toRow, totalRows },
       })
     );
     
-    fromRow.textContent = (page - 1) * limit; // С какой строки выводим
-    toRow.textContent = (page + 1) * limit; // До какой строки выводим
+    fromRow.textContent = (page - 1) * limit + 1; // С какой строки выводим
+    toRow.textContent = Math.min((page * limit), total); // До какой строки выводим
     totalRows.textContent = total; // Сколько всего строк выводим на всех страницах вместе (после фильтрации будет меньше)
   };
 

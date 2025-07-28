@@ -14,19 +14,17 @@ export function initFiltering(elements) {
 
   const applyFiltering = (query, state, action) => {
     // @todo: #4.2 — обработать очистку поля
-    if (action?.name === "clear") {
-      const parent = action.parentElement;
 
-      const input = parent.querySelector("input");
+    if (action?.name === "clear") {
+      const filterWrapper = action.closest(".filter-wrapper");
+      const input = filterWrapper.querySelector("input");
       if (input) {
         input.value = "";
       }
-      
       const fieldName = action.dataset.field;
-      if (fieldName && state.filters) {
-        state.filters[fieldName] = "";
+      if (fieldName) {
+        state[fieldName] = "";
       }
-      return {};
     }
 
     const filter = {};
